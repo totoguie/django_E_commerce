@@ -1,0 +1,50 @@
+{% load static %}
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href=" {%static 'css/bootstrap.min.css' %} ">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <title>Document</title>
+</head>{{produits.produit.titre}}
+<body>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered table-striped table-condensed" width="100%" cellspacing="0">
+                <thead >
+                  <tr class="table-primary">
+                    <th >#</th>
+                    <th >Produits</th>
+                    <th>Quantite</th>
+                    <th>Prix</th>
+                    <th>Total par produit</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for produits in object.produits.all %}
+                    <tr>
+                      <td>{{forloop.counter}}</td>
+                      <td class="numeric">{{produits.produit.titre}}</td>
+                      <td style="text-align: center;" class="numeric"><a href=" {% url 'supprimer_un_element' produits.produit.id %} " ><i style="float: left;" class="fas fa-minus mr-2"></i></a>{{produits.quantite}}<a href="{% url 'ajout_panier' produits.produit.id %}"><i style="float: right;" class="fas fa-plus ml-2"></i></a> </td>
+                      <td class="numeric">{{produits.produit.prix}} F CFA</td>
+                      <td class="numeric">{{produits.prix_total_produit}} F CFA <a href=" {% url 'supprimer_du_panier' produits.produit.id %} " ><i style="float: right; color: red;" class="fas fa-trash float-right"></i> </a></td>
+                    </tr>
+                    {%endfor%}
+                    <tr>
+                      <td colspan="4"><b>Total commande</b></td>
+                      <td><b> {{object.valeur_commande}} F CFA</b></td>
+                    </tr>
+                    <tr>
+                      <td colspan="5">
+                        <a class="btn btn-primary" style="float: right;" href=" {% url 'commande' %} ">Finalisez commande</a>
+                      <a class="btn btn-warning" style="float: left;"  href=" {% url 'index' %} ">Continuer commande</a>
+                    </td>
+                    </tr>
+                </tbody>
+            </table> 
+           
+        </div>
+    </div>
+</body>
+</html>

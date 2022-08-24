@@ -1,0 +1,45 @@
+{% load static %}
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="{%static 'index.css' %}">
+    <title>Document</title>
+</head>
+<body>
+    <div class="products-preview"> 
+        <div class="preview active">
+            <i class="fas fa-times"></i>
+            <img src="{{produit.image}}">
+            <h3>{{produit.titre}}</h3>
+            <div class="stars">
+                <i class="fa fa-star checked"></i>
+                <i class="fa fa-star checked"></i>
+                <i class="fa fa-star checked"></i>
+                <i class="fa fa-star checked"></i>
+                <i class="fa fa-star checked"></i>
+            </div>
+            <p>{{produit.description}}</p>
+            <div class="price">{{produit.prix}} F CFA</div>
+            <div class="buttons">
+                <a href="{% url 'supprimer_du_panier' produit.id %}" class="buy">Supprimer du panier</a>
+                <a href=" {% url 'ajout_panier' produit.id %}" class="cart">Ajouter au panier</a>
+            </div>
+        </div>
+    </div>
+</body>
+
+<script>
+    let previewContainer = document.querySelector('.products-preview');
+    let previewBox = previewContainer.querySelectorAll('.preview');
+    previewBox.forEach(close =>{
+        close.querySelector('.fa-times').onclick = () =>{
+            close.classList.remove('active');
+            window.location.href=" {% url 'index' %} ";
+            previewContainer.style.display = 'none';
+        };
+    });
+</script>
+</html>
