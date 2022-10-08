@@ -1,44 +1,38 @@
 {% load cart_template_tags %}
 {% load static %}
+
 <!doctype html>
-<html lang="en">
+<html lang="fr">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
     <meta name="generator" content="Hugo 0.88.1">
-    <title>Amlan crea</title>
+    <script src="https://code.jquery.com/jquery-3.6.1.js" integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI=" crossorigin="anonymous"></script>
+    <link rel="icon" href="{% static 'logo.jpg' %}">
+    <link rel="stylesheet" href="{% static 'bootstrap.min.css' %}">
+    <title>
+      {% block title %}
 
-    <link rel="stylesheet" href="{%static 'carousel.css' %}">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-    <link href=" {%static 'bootstrap.min.css' %}" rel="stylesheet">
-    <link rel="stylesheet" href="{%static 'index.css' %}">
+      {% endblock title %}
+    </title>
     
-
-    <style>
-      .bd-placeholder-img {
-        font-size: 1.125rem;
-        text-anchor: middle;
-        -webkit-user-select: none;
-        -moz-user-select: none;
-        user-select: none;
-      }
-
-      @media (min-width: 768px) {
-        .bd-placeholder-img-lg {
-          font-size: 3.5rem;
-        }
-    
-      }
-    </style>
-
-    
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  <link href="{% static 'assets/vendor/animate.css/animate.min.css' %}"rel="stylesheet">
+  <link href="{% static 'assets/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+  <link href="{% static 'assets/vendor/bootstrap-icons/bootstrap-icons.css' %}" rel="stylesheet">
+  <link href="{% static 'assets/vendor/boxicons/css/boxicons.min.css' %}" rel="stylesheet">
+  <link href=" {% static 'assets/vendor/glightbox/css/glightbox.min.css' %}" rel="stylesheet">
+  <link href="{% static 'assets/vendor/remixicon/remixicon.css' %}" rel="stylesheet">
+  <link href="{% static 'assets/vendor/swiper/swiper-bundle.min.css' %}" rel="stylesheet">
+  <link href="{% static 'assets/css/style.css' %}" rel="stylesheet">
+  <link href="{% static 'styl.css' %}" rel="stylesheet">
     <!-- Custom styles for this template -->
   </head>
   <body>
-    
-<header>
+   
+<!--
   <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
     <div class="container-fluid">
       <a class="navbar-brand" href="#">Amlan_crea</a>
@@ -48,84 +42,179 @@
       <div class="collapse navbar-collapse" id="navbarCollapse">
         <ul class="navbar-nav me-auto mb-2 mb-md-0">
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="#">Home</a>
+            <a class="nav-link active" aria-current="page" href=" {% url 'index' %} ">Home</a>
           </li>
           {% if request.user.is_authenticated %}
+          <li class="nav-item">
+            <a class="nav-link" href=" {% url 'commande' %} ">Commande</a>
+          </li>
           <li class="nav-item">
             <a class="nav-link" href=" {% url 'panier' %} ">
                 <span class="badge red z-deph-1 mr-1"> {{request.user|element_panier}} </span>
                 <i class="fas fa-shopping-cart "></i>
             </a>
           </li>
+          <li class="nav-item">
+            <a href=" {% url 'deconnexion' %} " class="nav-link ">
+              Deconnexion
+            </a>
+          </li>
+          {% else %}
+          <li class="nav-item">
+            <a href=" {% url 'connexion' %} " class="nav-link ">
+              Connexionn
+            </a>
+          
+          </li>
           {% endif %}
-          <li class="nav-item">
-            <a class="nav-link" href="#">Commande</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link ">Connexion</a>
-          </li>
         </ul>
-        <form class="d-flex">
-          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+        <form method="GET" class="d-flex">
+          <input class="form-control me-2" name="recherche" type="search" placeholder="Search" aria-label="Search">
           <button class="btn btn-outline-success" type="submit">Search</button>
         </form>
       </div>
     </div>
   </nav>
 </header>
+-->
 
-<main>
+  <!-- ======= Header ======= --> 
+  
+  <header id="header" class="fixed-top d-flex align-items-center">
+    <div class="container d-flex align-items-center">
 
-  <div id="myCarousel" class="carousel slide" data-bs-ride="carousel">
-    <div class="carousel-indicators">
-      <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-      <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
-      <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
+      <h1 class="logo me-auto"><a href="{% url 'index' %}">Amlan crea</a></h1>
+      <!-- Uncomment below if you prefer to use an image logo -->
+      <!-- <a href="index.html" class="logo me-auto"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
+
+      <nav id="navbar" class="navbar">
+        <ul>
+          <li><a href="{% url 'index' %}" class="active">Home</a></li>
+
+          <li class="dropdown"><a href="#"><span>Categories</span> <i class="bi bi-chevron-down"></i></a>
+            <ul>
+              <li><a href=" {% url 'vetements' %} ">Vetements</a></li>
+              <li><a href=" {% url 'accessoire' %} ">Accessoires</a></li>
+            </ul>
+          </li>
+          <li><a href=" {%url 'contact' %} ">Contact</a></li>
+        {% if request.user.is_authenticated %}
+          <li><a id="panier" class="nav-link" href=" {% url 'panier' %} ">
+            {{request.user|element_panier}}
+            <i class="fas fa-shopping-cart "></i>
+          </a></li>
+          <li><a href="{% url 'lougout' %}" class="getstarted">Deconnexion</a></li>
+          {% else %}
+          <li><a href="{% url 'connexion' %}" class="getstarted">Connexion</a></li>
+          {% endif %}
+        </ul>
+        <i class="bi bi-list mobile-nav-toggle"></i>
+      </nav><!-- .navbar -->
+
     </div>
-    <div class="carousel-inner">
-      <div class="carousel-item active">
-        <svg class="bd-placeholder-img" max-width="100%" max-height="100%" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false"><rect width="100%" height="100%" fill="#777"/></svg>
-        <img class="" src=" {%static 'IMG-20220811-WA0005.jpg' %}" height="200px" width="200px">
-        <div class="container">
-          <div class="carousel-caption text-start">
-            <h1>Example headline.</h1>
-            <p>Some representative placeholder content for the first slide of the carousel.</p>
+  </header><!-- End Header -->
+<section id="hero">
+  <div id="heroCarousel" data-bs-interval="5000" class="carousel slide carousel-fade" data-bs-ride="carousel">
+
+    <ol class="carousel-indicators" id="hero-carousel-indicators"></ol>
+
+    <div class="carousel-inner" role="listbox">
+
+      <!-- Slide 1 -->
+      <div class="carousel-item active" style="background-image: url(/static/coiffe.jpg);background-size: contain; background-repeat: repeat;">
+        <div class="carousel-container">
+          <div class="container">
+            <h2 class="animate__animated animate__fadeInDown">Bienvenue chez <span>Amlan crea</span></h2>
+            <p class="animate__animated animate__fadeInUp">Ut velit est quam dolor ad a aliquid qui aliquid. Sequi ea ut et est quaerat sequi nihil ut aliquam. Occaecati alias dolorem mollitia ut. Similique ea voluptatem. Esse doloremque accusamus repellendus deleniti vel. Minus et tempore modi architecto.</p>
           </div>
         </div>
       </div>
-      <div class="carousel-item">
-        <svg class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false"><rect width="100%" height="100%" fill="#777"/></svg>
-        <img src=" {%static 'coiffe5.jpg' %}" height="200px" width="200px">
-        <div class="container">
-          <div class="carousel-caption">
-            <h1>Another example headline.</h1>
-            <p>Some representative placeholder content for the second slide of the carousel.</p>
+
+      <!-- Slide 2 -->
+      <div class="carousel-item" style="background-image: url(/static/chapeau2.jpg); background-size:contain ;background-repeat: repeat;">
+        <div class="carousel-container">
+          <div class="container">
+            <h2 class="animate__animated animate__fadeInDown">Nous rendons votre style unique</h2>
+            <p class="animate__animated animate__fadeInUp">Ut velit est quam dolor ad a aliquid qui aliquid. Sequi ea ut et est quaerat sequi nihil ut aliquam. Occaecati alias dolorem mollitia ut. Similique ea voluptatem. Esse doloremque accusamus repellendus deleniti vel. Minus et tempore modi architecto.</p>
           </div>
         </div>
       </div>
-      <div class="carousel-item">
-        <svg class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false"><rect width="100%" height="100%" fill="#777"/></svg>
-        <img src=" {%static 'coiffe.jpg' %}" height="200px" width="200px">
-        <div class="container">
-          <div class="carousel-caption text-end">
-            <h1>One more for good measure.</h1>
-            <p>Some representative placeholder content for the third slide of this carousel.</p>
+
+      <!-- Slide 3 -->
+      <div class="carousel-item" style="background-image: url(/static/coiffe5.jpg);background-size:contain ;background-repeat: repeat;">
+        <div class="carousel-container">
+          <div class="container">
+            <h2 class="animate__animated animate__fadeInDown">Et tu passe de yougoss à caviar</h2>
+            <p class="animate__animated animate__fadeInUp">Ut velit est quam dolor ad a aliquid qui aliquid. Sequi ea ut et est quaerat sequi nihil ut aliquam. Occaecati alias dolorem mollitia ut. Similique ea voluptatem. Esse doloremque accusamus repellendus deleniti vel. Minus et tempore modi architecto.</p>
+           
           </div>
         </div>
       </div>
+
     </div>
-    <button class="carousel-control-prev" type="button" data-bs-target="#myCarousel" data-bs-slide="prev">
-      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-      <span class="visually-hidden">Previous</span>
-    </button>
-    <button class="carousel-control-next" type="button" data-bs-target="#myCarousel" data-bs-slide="next">
-      <span class="carousel-control-next-icon" aria-hidden="true"></span>
-      <span class="visually-hidden">Next</span>
-    </button>
+
+    <a class="carousel-control-prev" href="#heroCarousel" role="button" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon bi bi-chevron-left" aria-hidden="true"></span>
+    </a>
+
+    <a class="carousel-control-next" href="#heroCarousel" role="button" data-bs-slide="next">
+      <span class="carousel-control-next-icon bi bi-chevron-right" aria-hidden="true"></span>
+    </a>
+
   </div>
+</section><br><br>
+
+<div class="row">
+  <div class="col-md-12">
+    <div class="card">
+      <form method="GET" class="card-body row no-gutters align-items-center">
+        <div class="col">
+          <input type="search" name="recherche" class="form-control" >
+        </div>
+        <div class="col-auto">
+          <button type="submit" class="btn btn-primary">Recherche</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+
 {% block content %}
   
 {% endblock content %}
+<!-- ======= Footer ======= -->
+<footer id="footer">
+  <div class="container">
+    <div class="copyright">
+      &copy; Copyright <strong><span>Amlan crea</span></strong>
+    </div>
+    <div class="credits">
+      <!-- All the links in the footer should remain intact. -->
+      <!-- You can delete the links only if you purchased the pro version. -->
+      <!-- Licensing information: https://bootstrapmade.com/license/ -->
+      <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/sailor-free-bootstrap-theme/ -->
+      Designed by <a target="_blank" href="https://totoguie.com/">TOTO</a>
+    </div>
+  </div>
+</footer><!-- End Footer -->
+
+<a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
 </html>
 <script src=" {% static 'bootstrap.bundle.min.js' %} "></script>
+<script src=" {% static '/assets/vendor/bootstrap/js/bootstrap.bundle.min.js' %} "></script>
+  <script src="{% static '/assets/vendor/glightbox/js/glightbox.min.js' %}"></script>
+  <script src="{% static '/assets/vendor/isotope-layout/isotope.pkgd.min.js' %}"></script>
+  <script src="{% static '/assets/vendor/swiper/swiper-bundle.min.js' %}"></script>
+  <script src="{% static '/assets/vendor/waypoints/noframework.waypoints.js' %}"></script>
+
+  <!-- MDB -->
+<script
+type="text/javascript"
+src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/5.0.0/mdb.min.js"
+></script>
+
+
+  <!-- Template Main JS File -->
+  <script src=" {% static '/assets/js/main.js' %}"></script>

@@ -1,0 +1,75 @@
+{% extends "BuyOnline/base.html" %}
+{% load static %}
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% block title %}
+      Amlan crea | Accessoires
+    {% endblock title %}
+</head>
+{% block content %}
+<body>
+    <div class="gallery">
+        {% for accessoires in accessoires %}
+        <div class="content" data-name="{{accessoires.id}}">
+             <img src="{{accessoires.image.url}}">
+            <h3>{{accessoires.titre}}</h3>
+            <h6>{{accessoires.prix}} F CFA</h6>
+            <ul>
+                <li><i class="fa fa-star checked"></i></li>
+                <li><i class="fa fa-star checked"></i></li>
+                <li><i class="fa fa-star checked"></i></li>
+                <li><i class="fa fa-star "></i></li>
+                <li><i class="fa fa-star "></i></li>
+            </ul>
+            <a href="{% url 'produit' accessoires.id %}"><button class="buy"> Acheter</button></a>
+         </div>
+         {% endfor %}
+    </div>
+    <div class="pagination">
+        Pages {{accessoires.number}} sur {{accessoires.paginator.num_pages}}
+        {% if accessoires.has_previous %}
+        
+        <a style="float:left; margin-bottom: 12px; margin-left: 10px;margin-bottom: 30px;" class="btn btn-primary" href="?page={{accessoires.previous_page_number}}">Precedent</a>
+        {% endif %}
+        {% if accessoires.has_next %}
+        <a style="float: right; margin-bottom: 12px; margin-left: 10px; margin-bottom: 30px; " class="btn btn-primary" href="?page={{accessoires.next_page_number}}">Suivant</a>
+        
+          
+        {% endif %}
+    </div>
+
+
+</body>
+{% endblock content %} 
+<script type="text/javascript" >
+    let previewContainer = document.querySelector('.products-preview');
+    let previewBox = document.querySelectorAll('.preview');
+
+alert(previewBox);
+
+document.querySelectorAll('.gallery .content').forEach(content=>{
+    content.onclick = () =>{
+        previewContainer.style.display = 'flex';
+        let name = content.getAttribute('data-name');
+        previewBox.forEach(preview =>{
+            let target = preview.getAttribute('data-target');
+            if (name == target) {
+                preview.classList.add('active');
+            }
+        });
+    };
+});
+
+previewBox.forEach(close =>{
+    close.querySelector('.fa-times').onclick = ()=>{
+        close.classList.remove('active');
+        previewContainer.style.display = 'none';
+    };
+});
+
+
+</script>
+</html>

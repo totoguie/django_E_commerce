@@ -1,0 +1,73 @@
+{% extends "BuyOnline/base.html" %}
+{% load static %}
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href=" {%static 'index.css'  %} ">
+    
+    <title>Document</title>
+</head>
+{% block content %}
+<body>
+    <div class="gallery">
+        {% for produits in produits %}
+        <div class="content" data-name="{{produits.id}}">
+            <img src="{{produits.image}}">
+            <h3>{{produits.titre}}</h3>
+            <p>{{produits.description}} </p>
+            <h6>{{produits.prix}} F CFA</h6>
+            <ul>
+                <li><i class="fa fa-star checked"></i></li>
+                <li><i class="fa fa-star checked"></i></li>
+                <li><i class="fa fa-star checked"></i></li>
+                <li><i class="fa fa-star "></i></li>
+                <li><i class="fa fa-star "></i></li>
+            </ul>
+            <button class="buy"><a href="{% url 'produit' produits.id %}">Acheter</a></button>
+         </div>
+         {% endfor %}
+    </div>
+    <div class="pagination">
+        Pages {{produits.number}} sur {{produits.paginator.num_pages}}
+        {% if produits.has_previous %}
+        
+        <a style="float:left; margin-bottom: 12px; margin-left: 10px;margin-bottom: 30px;" class="btn btn-primary" href="?page={{produits.previous_page_number}}">Precedent</a>
+        {% endif %}
+        {% if produits.has_next %}
+        <a style="float: right; margin-bottom: 12px; margin-left: 10px; margin-bottom: 30px; " class="btn btn-primary" href="?page={{produits.next_page_number}}">Suivant</a>
+        
+          
+        {% endif %}
+        
+    </div>
+    
+</body>
+{% endblock content %} 
+<script>
+    let previewContainer = document.querySelector('.products-preview');
+    let previewBox = previewContainer.querySelectorAll('.preview');
+
+    document.querySelectorAll('.gallery .content').forEach(content =>{
+        content.onclick = () =>{
+            previewContainer.style.display = 'flex';
+            let name = content.getAttribute('data-name');
+            previewBox.forEach(preview =>{
+                let target = preview.getAttribute('data-target');
+                if(name == target){
+                  preview.classList.add('active');
+                     
+                }
+            });
+        };
+    });
+    previewBox.forEach(close =>{
+        close.querySelector('.fa-times').onclick = () =>{
+            close.classList.remove('active');
+            previewContainer.style.display = 'none';
+        };
+    });
+</script>
+</html>

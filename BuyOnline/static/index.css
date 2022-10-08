@@ -104,13 +104,13 @@ button{
     min-height: 100vh;
     width: 100%;
     background: rgba(0, 0, 0, .8);
-    display: flex;
+    display: none;
     align-items: center;
     justify-content: center;
 }
 
 .products-preview .preview{
-    display: none;
+    display: flex;
     padding: 2rem;
     text-align: center;
     background: #fff;
@@ -197,9 +197,6 @@ button{
     background: rgb(197, 13, 13);
     color: #fff;
 }
-
-
-
 
 @media(max-width:1000px){
     .content{

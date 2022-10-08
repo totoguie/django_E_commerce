@@ -1,0 +1,33 @@
+{% load static %}
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+        {% block titke %}
+          
+        {% endblock titke %}
+    </title>
+    <link href="{% static 'assets/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+</head>
+<body>
+    <section id="breadcrumbs" class="breadcrumbs">
+        <div class="container">
+          <div class="d-flex justify-content-between align-items-center">
+            <h2>Contact</h2>
+            <ol>
+              <li><a href=" {% url 'index' %} ">Home</a></li>
+              <li>Contact</li>
+            </ol>
+          </div>
+        </div>
+    <div class="py-2 text-center">
+        <img class="d-block mx-auto mb-4" src=" {% static 'logo.jpg' %} " alt="" width="72" height="57">
+         <h2>Amlan crea</h2>
+    </div>
+    {% block content %}
+      
+    {% endblock content %}
+</body>
+</html>

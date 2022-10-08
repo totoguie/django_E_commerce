@@ -1,0 +1,67 @@
+{% extends "BuyOnline/base.html" %}
+{% load static %}
+{% block title %}
+      Amlan crea | Vetements
+{% endblock title %}
+{% block content %} 
+<body>
+    <div class="gallery">
+        {% for vetements in vetements %}
+        <div class="content" data-name="{{vetements.id}}">
+             <img src="{{vetements.image.url}}">
+            <h3>{{vetements.titre}}</h3>
+            <h6>{{vetements.prix}} F CFA</h6>
+            <ul>
+                <li><i class="fa fa-star checked"></i></li>
+                <li><i class="fa fa-star checked"></i></li>
+                <li><i class="fa fa-star checked"></i></li>
+                <li><i class="fa fa-star "></i></li>
+                <li><i class="fa fa-star "></i></li>
+            </ul>
+            <a href="{% url 'produit' vetements.id %}"><button class="buy"> Acheter</button></a>
+         </div>
+         {% endfor %}
+    </div>
+    <div class="pagination">
+        Pages {{vetements.number}} sur {{vetements.paginator.num_pages}}
+        {% if vetements.has_previous %}
+        
+        <a style="float:left; margin-bottom: 12px; margin-left: 10px;margin-bottom: 30px;" class="btn btn-primary" href="?page={{vetements.previous_page_number}}">Precedent</a>
+        {% endif %}
+        {% if vetements.has_next %}
+        <a style="float: right; margin-bottom: 12px; margin-left: 10px; margin-bottom: 30px; " class="btn btn-primary" href="?page={{vetements.next_page_number}}">Suivant</a>
+        
+          
+        {% endif %}
+    </div>
+</body>
+{% endblock content %} 
+<script type="text/javascript" >
+    let previewContainer = document.querySelector('.products-preview');
+    let previewBox = document.querySelectorAll('.preview');
+
+alert(previewBox);
+
+document.querySelectorAll('.gallery .content').forEach(content=>{
+    content.onclick = () =>{
+        previewContainer.style.display = 'flex';
+        let name = content.getAttribute('data-name');
+        previewBox.forEach(preview =>{
+            let target = preview.getAttribute('data-target');
+            if (name == target) {
+                preview.classList.add('active');
+            }
+        });
+    };
+});
+
+previewBox.forEach(close =>{
+    close.querySelector('.fa-times').onclick = ()=>{
+        close.classList.remove('active');
+        previewContainer.style.display = 'none';
+    };
+});
+
+
+</script>
+</html>

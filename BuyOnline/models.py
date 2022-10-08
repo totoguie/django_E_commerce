@@ -5,14 +5,14 @@ from django.urls import reverse
 
 class Produit(models.Model):
     category_choice =(
-        ('V','Vetement'),
-        ('C','Chaussure'),
-        ('L','Lingerie'),
-        ('A','Accessoire')
+        ('Vetement','Vetement'),
+        ('Chaussure','Chaussure'),
+        ('Lingerie','Lingerie'),
+        ('Accessoire','Accessoire')
     )
     titre = models.CharField(max_length=50)
     description = models.CharField(max_length=100)
-    category = models.CharField(choices=category_choice,max_length=2)
+    category = models.CharField(choices=category_choice,max_length=15)
     prix = models.FloatField()
     image = models.ImageField()
     
@@ -28,10 +28,10 @@ class Produit(models.Model):
         return reverse("supprimer_du_panier", kwargs={
             'id': self.id
         })    
-
+        
 class ProduitCommande(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    ordered = models.BooleanField(default=False)
+    statut = models.CharField(max_length=15, default="non livré")
     produit = models.ForeignKey(Produit,on_delete=models.CASCADE)
     quantite = models.IntegerField(default=1)
     
@@ -49,8 +49,9 @@ class Commande(models.Model):
     produits = models.ManyToManyField(ProduitCommande)
     start_date =models.DateTimeField(auto_now_add=True)
     ordered_date = models.DateTimeField()
-    ordered = models.BooleanField(default=False)
-    clients = models.ForeignKey('Client',on_delete=models.SET_NULL,blank=True,null=True)
+    statut = models.CharField(max_length=15, default="non livré")
+    clients = models.ForeignKey('Clients',models.SET_NULL,blank=True,null=True)
+    
     
     def __str__(self):
         return self.user.username
@@ -62,8 +63,8 @@ class Commande(models.Model):
         for produit in produits:
             total = total + produit.prix_final()
         return total
-    
-class Client(models.Model):
+
+class Clients(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     nom = models.CharField(max_length=30)
     prenom = models.CharField(max_length=50)
@@ -72,4 +73,5 @@ class Client(models.Model):
     Localisation = models.CharField(max_length=200)  
     
     def __str__(self):
-        return self.nom 
+        return self.nom +" "+ self.prenom    
+

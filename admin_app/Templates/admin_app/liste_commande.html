@@ -1,0 +1,173 @@
+{% load static %}
+<!DOCTYPE html>
+  <html>
+  <head>
+  	<meta charset="utf-8">
+  	<meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="{%static 'admin_app/dashboard.css' %}">
+    <link rel="stylesheet" type="" href="css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" type="text/css" href="css/fonts.css">
+  	<title>Amlan_crea | login</title>
+  </head>
+  <body>
+  	<div class="container">
+     <div class="navigation">
+       <ul>
+         <li>
+          <a href="#">
+           <span class="icon"><i class="fa fa-user" aria-hidden="true"></i></span>
+           <span class="title"><h2>Amlan_crea</h2></span>
+         </a>
+         </li>
+         <li>
+          <a href=" {% url 'index' %} ">
+           <span class="icon"><i class="fas fa-home" aria-hidden="true"></i> </span>
+           <span class="title">Accueil</span>
+         </a>
+         </li>
+         <li>
+          <a href="{% url 'listeclient' %}">
+           <span class="icon"><i class="fa fa-female"></i><i class="fa fa-male"></i></span>
+           <span class="title">Clients</span>
+         </a>
+         </li>
+         <li>
+          <a href="#">
+           <span class="icon"><i class="fa fa-shopping-cart"></i></span>
+           <span class="title">Commande</span>
+         </a>
+         </li>
+         <li>
+          <a href=" {% url 'commandeLivre' %} ">
+           <span class="icon"><i class="fa fa-check"></i></span>
+           <span class="title">Commande Livre</span>
+         </a>
+         </li>
+         <li>
+          <a href=" {%url 'listeproduit' %} ">
+           <span class="icon"><i class="fa fa-tshirt"></i></span>
+           <span class="title">Produit</span>
+         </a>
+         </li>
+         <li>
+          <a href=" {% url 'ajouterproduit' %} ">
+           <span class="icon"><i class="fa fa-plus"></i></span>
+           <span class="title">Ajout produit</span>
+         </a>
+         </li>
+         <li>
+          <a href=" {% url 'deconnexion' %} ">
+           <span class="icon"><i class="fa fa-sign-out-alt" aria-hidden="true"></i></span>
+           <span class="title">Deconnexion</span>
+           </a>
+         </li>
+       </ul>
+     </div> 
+
+     <div class="main">
+       <div class="topbar">
+         <div class="toggle" onclick="toggleMenu();"></div>
+         <div class="user">
+          <img src=" {% static 'logo.jpg' %} ">
+         </div>
+       </div>
+       <div class="cardBox">
+         <div class="card">
+           <div>
+             <div class="numbers">{{commandes}}
+             </div>
+             <div class="cardName">
+               Commandes
+             </div>
+           </div>
+           <div class="iconBox">
+             <i class="fas fa-eye"aria-hidden="true"></i> 
+           </div>
+         </div>
+         <div class="card">
+           <div>
+             <div class="numbers">{{clients}}
+             </div>
+             <div class="cardName">
+               Clients
+             </div>
+           </div>
+           <div class="iconBox">
+             <i class="fas fa-eye"aria-hidden="true"></i> 
+           </div>
+         </div>
+         <div class="card">
+           <div>
+             <div class="numbers">{{produit}}
+             </div>
+             <div class="cardName">
+               Produits
+             </div>
+           </div>
+           <div class="iconBox">
+             <i class="fas fa-eye"aria-hidden="true"></i> 
+           </div>
+         </div>
+         <div class="card">
+          <div>
+            <div class="numbers">
+            </div>
+            <div class="cardName">
+              Visiteurs
+            </div>
+          </div>
+          <div class="iconBox">
+            <i class="fas fa-eye"aria-hidden="true"></i> 
+          </div>
+        </div>
+       </div>
+
+       <div class="details" >
+         <div class="recentOrder">
+           <div class="cardHearder">
+             <h2>Liste Commande</h2>
+           </div>
+           <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered table-striped table-condensed" width="100%" cellspacing="0">
+                    <thead >
+                      <tr class="table-primary">
+                        <th >Numero</th>
+                        <th>Clients</th>
+                        <th >Date</th>
+                        <th>Montant</th>
+                        <th>Statut</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {% for commande in commande %}
+                        <tr>
+                          <td>commande {{commande.id}}</td>
+                          <td>{{commande.clients}}</td>
+                          <td>{{commande.start_date}}</td>
+                          <td><b> {{commande.valeur_commande}} F CFA</b></td>
+                          <td> {{commande.statut}} <a style="float: right; margin-bottom: 12px; margin-left: 10px; margin-bottom: 30px; " class="btn btn-primary" href=" {% url 'detailcommande' commande.id %} ">Detail</a></td>
+                        </tr>
+                        {%endfor%}
+                    </tbody>
+                </table> 
+               
+            </div>
+         </div>
+       </div>
+     </div>
+    </div>
+
+    <script type="text/javascript">
+      function toggleMenu(){
+        let toggle = document.querySelector('.toggle');
+        let navigation = document.querySelector('.navigation');
+        let main = document.querySelector('.main');
+        toggle.classList.toggle('active');
+        navigation.classList.toggle('active');
+        main.classList.toggle('active');
+      }
+    </script>
+  </body>
+  </html>

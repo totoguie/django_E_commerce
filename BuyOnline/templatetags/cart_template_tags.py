@@ -7,7 +7,7 @@ register = template.Library()
 @register.filter
 def element_panier(user):
     if user.is_authenticated:
-        qs = Commande.objects.filter(user=user , ordered=False)
+        qs = Commande.objects.filter(user=user , statut = "non livré")
         if qs.exists():
             return qs[0].produits.count()
-    return 0
+    return 0 

@@ -1,0 +1,22 @@
+{% load static %}
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="" href="css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href=" {%static 'admin_app/bootstrap.min.css' %} ">
+    <link rel="stylesheet" type="text/css" href="css/fonts.css">
+  	<title>Amlan_crea | login</title>
+    <title>Document</title>
+</head>
+<body>
+    <form method="POST">
+        {%csrf_token%}
+        <p>Voulez-vous supprimer cet article ?</p><br>
+        <input type="submit" value="OUI" class="btn btn-danger">
+        <a href=" {% url 'dashboard' %}" class="btn btn-secondary">NON</a>
+    </form>
+</body>
+</html>

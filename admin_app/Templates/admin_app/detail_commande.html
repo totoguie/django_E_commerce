@@ -1,0 +1,65 @@
+{% load static %}
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href=" {%static 'css/bootstrap.min.css' %} ">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <title>Amlan crea | panier</title>
+</head>{{produits.produit.titre}}
+<body>
+    <div class="card-body">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8 mx-auto">
+                    <h2>Information client</h2>
+                    <p><b>Nom :</b> {{detailcommande.clients.nom}}</p>
+                    <p><b>Prenom :</b> {{detailcommande.clients.prenom}}</p>
+                    <p><b>E-mail :</b> {{detailcommande.clients.mail}}</p>
+                    <p><b>Telephone :</b> {{detailcommande.clients.telephone}}</p>
+                    <p><b>Localisation :</b> {{detailcommande.clients.Localisation}}</p>
+                </div>
+            </div>
+        </div>
+        <div class="table-responsive">
+            <table class="table table-bordered table-striped table-condensed" width="100%" cellspacing="0">
+                <thead >
+                  <tr class="table-primary">
+                    <th >#</th>
+                    <th >Produits</th>
+                    <th>Quantite</th>
+                    <th>Prix unitaire</th>
+                    <th>Total par produit</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for produits in detailcommande.produits.all %}
+                    <tr>
+                      <td>{{forloop.counter}}</td>
+                      <td class="numeric">{{produits.produit.titre}}</td>
+                      <td style="text-align: center;" class="numeric">{{produits.quantite}}</td>
+                      <td class="numeric">{{produits.produit.prix}} F CFA</td>
+                      <td class="numeric">{{produits.prix_total_produit}} F CFA</td>
+                    </tr>
+                    {%endfor%}
+                    <tr>
+                      <td colspan="4"><p></p> <b>Total commande</b></td>
+                      <td><p></p> <b> {{object.valeur_commande}} F CFA</b></td>
+                    </tr>
+                    <tr>
+                      <td colspan="5">
+                        <form action="" method="POST">
+                          {% csrf_token %}
+                            <input value="Valider" name="valider" type="submit" class="btn btn-primary" style="float: right;">
+                        </form>
+                      <a class="btn btn-warning" style="float: left;"  href=" {% url 'dashboard' %} ">Retour</a>
+                    </td>
+                    </tr>
+                </tbody>
+            </table> 
+           
+        </div>
+    </div>
+</body>
+</html>

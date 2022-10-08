@@ -1,0 +1,340 @@
+:root{
+    --orange:#f9f1ac;
+    --black:#130f40;
+    --light-color:#666;
+    --box-shadow:0 .5rem 1.5rem rgba(0,0,0,.1);
+    --border:.2rem solid rgba(0,0,0,.1);
+    --outline:.1rem solid rgba(0,0,0,.1);
+    --bittersweet: hsl(5, 100%, 69%);
+    --outline-hover:.2rem solid var(--black);
+}
+
+*{
+    font-family: 'Poppins', sans-serif;
+    margin:0; padding:0;
+    box-sizing: border-box;
+    outline: none; border:none;
+    text-decoration: none;
+    text-transform: capitalize;
+    transition: all .2s linear;
+}
+
+html{
+    font-size: 62.5%;
+    overflow-x: hidden;
+    scroll-behavior: smooth;
+    scroll-padding-top: 7rem;
+}
+
+
+/* bar de navigation */
+
+section{
+    padding:2rem 9%;
+}
+
+.heading{
+    text-align: center;
+    padding:2rem 0;
+    padding-bottom: 3rem;
+    font-size: 3.5rem;
+    color:var(--black);
+}
+
+.heading span{
+    background: var(--orange);
+    display: inline-block;
+    padding:.5rem 3rem;
+    clip-path: polygon(100% 0, 93% 50%, 100% 99%, 0% 100%, 7% 50%, 0% 0%);
+}
+
+.btn{
+    margin-top: 1rem;
+    display: inline-block;
+    padding:.8rem 3rem;
+    font-size: 1.7rem;
+    border-radius: .5rem;
+    border:.2rem solid var(--black);
+    color:var(--black);
+    cursor: pointer;
+}
+
+.btn:hover{
+    background: var(--orange);
+    color:#fff;
+}
+
+.header{
+    position: fixed;
+    top:0; left:0; right: 0;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding:2rem 9%;
+    box-shadow: var(--box-shadow);
+    background:#FFFACD;
+}
+
+.header .logo{
+    font-size: 2.5rem;
+    font-weight: bolder;
+    color:var(--black);
+    color: #000000;
+    
+}
+
+.header .logo:hover{
+    color: #fff;
+}
+
+.header .logo i{
+    color:var(--orange);
+    color: #fff;
+}
+
+
+.header .navbar a{
+    position: relative;
+    font-size: 2rem;
+    margin:0 1rem;
+    font-weight: bold;
+    color:var(--black);
+    color: #000000;
+}
+
+.header .navbar a:before{
+    content: '';
+    position: absolute;
+    background: #fff;
+    width: 0;
+    height: 3px;
+    bottom: 0;
+    left: 0;
+    transition: 0.5s ease;
+
+}
+
+.header .navbar a:hover:before{
+    width: 100%;
+    color:var(--orange);
+    color: #000;
+    width: 100%;
+}
+
+.header .icons{
+    display: flex;
+}
+
+.header .icons div{
+    height: 4.5rem;
+    width: 4.5rem;
+    line-height: 4.5rem;
+    border-radius: .5rem;
+    background: #eee;
+    color:var(--black);
+    font-size: 2rem;
+    margin-left: .3rem;
+    cursor: pointer;
+    text-align: center;
+}
+
+.header .search-form .boutton{
+    background: #f9f1ac;
+    height: 60px;
+    width: 62px;
+    position: absolute;
+    right: -2px;
+    top: -3px;
+
+    cursor: pointer;
+}
+
+.header .search-form i{
+    font-size: 2rem;
+
+} 
+
+#menu-btn{
+    display: none;
+}
+
+.header .icons div:hover{
+    background: var(--orange);
+    color:#fff;
+}
+
+.header .search-form{
+    position: absolute;
+    top:110%; right:-110%;
+    width: 50rem;
+    height:5rem;
+    background: #fff;
+    border-radius: .5rem;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    box-shadow: var(--box-shadow);
+}
+
+.header .search-form.active{
+    right:2rem;
+    transition: .4s linear;
+}
+
+.header .navbar.active{
+    right: .1rem;
+    transition: .4s linear;
+}
+
+.header .search-form input{
+    height:100%;
+    width:100%;
+    background: none;
+    text-transform: none;
+    font-size: 1.6rem;
+    color:var(--black);
+    padding:0 1.5rem;
+}
+
+.header .search-form label{
+    font-size: 2.2rem;
+    padding-right: 1.5rem;
+    color:var(--black);
+    cursor: pointer;
+}
+
+.header .search-form label:hover{
+    color:var(--orange);
+}
+/* fin de la bar de vigation */
+
+
+/* image de fond slider */
+
+.slider{
+    position: relative;
+    width: 100%;
+    background: #fbff05d8;
+}
+
+.myslider{
+    height: 100vh;
+    overflow: hidden;
+    display: none;
+    background-size: cover;
+}
+
+.prev, .next{
+    position: absolute;
+    top: 45%;
+    transform: translate(0, -50%);
+    font-size: 50px;
+    padding: 15px;
+    cursor: pointer;
+    color: #fff;
+    transition: 0.1s;
+    user-select: none;
+}
+
+.prev:hover, .next:hover{
+    color: #fcce1c;
+}
+
+.next{
+    right: 0;
+}
+
+.dotsbox{
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%);
+    bottom: 20px;
+    cursor: pointer;
+}
+
+.dot{
+    display: inline-block;
+    width: 15px;
+    height: 15px;
+    border: solid 3px #ff7800;
+    border-radius: 50%;
+    margin: 0 10px;
+    cursor: pointer;
+}
+
+.actve, .dot:hover{
+    border-color: #fcce1c;
+}
+
+.fade{
+    -webkit-animation-name: fade;
+    -webkit-animation-duration: 1.5s;
+    animation-name: fade;
+    animation-duration: 1.5s;
+}
+
+@-webkit-keyframes fade{
+    from{opacity: 0.8}
+    to {opacity: 1}
+}
+
+@keyframes fade{
+    from{opacity: 0.8}
+    to {opacity: 1}
+}
+
+.txt{
+    position: absolute;
+    color: #fff;
+    letter-spacing: 2px;
+    line-height: 35px;
+    top: 40%;
+    left: 15%;
+    -webkit-animation-name: posi;
+    -webkit-animation-duration: 2s;
+    animation-name: posi;
+    animation-duration: 2s;
+    z-index: 1;
+}
+
+@-webkit-keyframes posi{
+    from{left: 25%}
+    to {left: 15%}
+    
+}
+
+@keyframes posi{
+    from{left: 25%}
+    to {left: 15%}
+}
+
+.txt h1{
+    color: #fcce1c;
+    font-weight: bold;
+    font-size: 6em;
+    margin-bottom: 20px;
+}
+
+.txt P{
+    font-weight: bold;
+    font-size: 2rem;
+}
+
+.defile{
+    transform: scale(1.5, 1.5);
+    -webkit-animation-name: zoomin;
+    -webkit-animation-duration: 40s;
+    animation-name: zoomin;
+    animation-duration: 40s;
+}
+
+@-webkit-keyframes zoomin{
+    from{transform: scale(1, 1)}
+    to {transform: scale(1.5, 1.5)}
+}
+
+@keyframes zoomin{
+    from{transform: scale(1, 1)}
+    to {transform: scale(1.5, 1.5)}
+}
