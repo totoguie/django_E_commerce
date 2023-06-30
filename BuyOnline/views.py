@@ -298,7 +298,7 @@ class commande(View):
            return render (self.request, 'BuyOnline/commande.html',context=context)
         except ObjectDoesNotExist:
             messages.error(self.request, "Vous n'avez aucun produit commande")
-            return redirect("")
+            return redirect("panier")
         
     def post(self, *args, **kwargs):
         try: 
@@ -326,4 +326,4 @@ class commande(View):
             return redirect("commande")
         except ObjectDoesNotExist:
             messages.error(self.request, "Vous n'avez aucun produit commande")
-            return redirect("") 
+            return redirect("panier") 

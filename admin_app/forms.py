@@ -7,7 +7,7 @@ class ProduitForm(forms.ModelForm):
     class Meta:
         model = Produit
         fields = ['titre','description','category','prix','image']
-        labels = {'titer':'titre','description':'description','categorie':'categorie','prix':'prix','image':'image'}
+        labels = {'titre':'titre','description':'description','categorie':'categorie','prix':'prix','image':'image'}
         Widgets={
             'titre':forms.TextInput(attrs={'class':'form-control'}),
             'description':forms.Textarea(attrs={'class':'form-control','rows':5}),

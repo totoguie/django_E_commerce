@@ -1,4 +1,5 @@
 {% extends "BuyOnline/base.html" %}
+{% load custom_filters %}
 {% load static %}
 {% block title %}
       Amlan crea | Vetements
@@ -10,7 +11,7 @@
         <div class="content" data-name="{{vetements.id}}">
              <img src="{{vetements.image.url}}">
             <h3>{{vetements.titre}}</h3>
-            <h6>{{vetements.prix}} F CFA</h6>
+            <h6>{{vetements.prix|floatformat:0|format_with_spaces}} F CFA</h6>
             <ul>
                 <li><i class="fa fa-star checked"></i></li>
                 <li><i class="fa fa-star checked"></i></li>

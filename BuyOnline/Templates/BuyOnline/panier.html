@@ -1,4 +1,5 @@
 {% load static %}
+{% load custom_filters %}
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
@@ -27,13 +28,13 @@
                       <td>{{forloop.counter}}</td>
                       <td class="numeric">{{produits.produit.titre}}</td>
                       <td style="text-align: center;" class="numeric"><a href=" {% url 'supprimer_un_element' produits.produit.id %} " ><i style="float: left;" class="fas fa-minus mr-2"></i></a>{{produits.quantite}}<a href="{% url 'ajout_panier' produits.produit.id %}"><i style="float: right;" class="fas fa-plus ml-2"></i></a> </td>
-                      <td class="numeric">{{produits.produit.prix}} F CFA</td>
-                      <td class="numeric">{{produits.prix_total_produit}} F CFA <a href=" {% url 'supprimer_du_panier' produits.produit.id %} " ><i style="float: right; color: red;" class="fas fa-trash float-right"></i> </a></td>
+                      <td class="numeric">{{produits.produit.prix|floatformat:0|format_with_spaces}} F CFA</td>
+                      <td class="numeric">{{produits.prix_total_produit|floatformat:0|format_with_spaces}} F CFA <a href=" {% url 'supprimer_du_panier' produits.produit.id %} " ><i style="float: right; color: red;" class="fas fa-trash float-right"></i> </a></td>
                     </tr>
                     {%endfor%}
                     <tr>
                       <td colspan="4"><b>Total commande</b></td>
-                      <td><b> {{object.valeur_commande}} F CFA</b></td>
+                      <td><b> {{object.valeur_commande|floatformat:0|format_with_spaces}} F CFA</b></td>
                     </tr>
                     <tr>
                       <td colspan="5">
@@ -43,7 +44,6 @@
                     </tr>
                 </tbody>
             </table> 
-           
         </div>
     </div>
 </body>

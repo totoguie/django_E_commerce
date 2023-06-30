@@ -23,7 +23,7 @@
             </div>
         </div>
         <div class="table-responsive">
-            <table class="table table-bordered table-striped table-condensed" width="100%" cellspacing="0">
+            <table class="table table-bordered table-striped table-condensed">
                 <thead >
                   <tr class="table-primary">
                     <th >#</th>
@@ -39,13 +39,13 @@
                       <td>{{forloop.counter}}</td>
                       <td class="numeric">{{produits.produit.titre}}</td>
                       <td style="text-align: center;" class="numeric">{{produits.quantite}}</td>
-                      <td class="numeric">{{produits.produit.prix}} F CFA</td>
-                      <td class="numeric">{{produits.prix_total_produit}} F CFA</td>
+                      <td class="numeric">{{produits.produit.prix|floatformat:0|format_with_spaces}} F CFA</td>
+                      <td class="numeric">{{produits.prix_total_produit|floatformat:0|format_with_spaces}} F CFA</td>
                     </tr>
                     {%endfor%}
                     <tr>
                       <td colspan="4"><p></p> <b>Total commande</b></td>
-                      <td><p></p> <b> {{object.valeur_commande}} F CFA</b></td>
+                      <td><p></p> <b> {{object.valeur_commande|floatformat:0|format_with_spaces}} F CFA</b></td>
                     </tr>
                     <tr>
                       <td colspan="5">

@@ -16,7 +16,7 @@
         <div class="content" data-name="{{accessoires.id}}">
              <img src="{{accessoires.image.url}}">
             <h3>{{accessoires.titre}}</h3>
-            <h6>{{accessoires.prix}} F CFA</h6>
+            <h6>{{accessoires.prix|floatformat:0|format_with_spaces}} F CFA</h6>
             <ul>
                 <li><i class="fa fa-star checked"></i></li>
                 <li><i class="fa fa-star checked"></i></li>

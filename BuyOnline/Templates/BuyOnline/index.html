@@ -1,5 +1,6 @@
 {% extends "BuyOnline/base.html" %}
 {% load static %}
+{% load custom_filters %}
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
@@ -16,7 +17,7 @@
         <div class="content" data-name="{{produits.id}}">
              <img src="{{produits.image.url}}">
             <h3>{{produits.titre}}</h3>
-            <h6>{{produits.prix}} F CFA</h6>
+            <h6>{{produits.prix|floatformat:0|format_with_spaces}} F CFA</h6>
             <ul>
                 <li><i class="fa fa-star checked"></i></li>
                 <li><i class="fa fa-star checked"></i></li>
@@ -47,8 +48,6 @@
 <script type="text/javascript" >
     let previewContainer = document.querySelector('.products-preview');
     let previewBox = document.querySelectorAll('.preview');
-
-alert(previewBox);
 
 document.querySelectorAll('.gallery .content').forEach(content=>{
     content.onclick = () =>{
