@@ -1,4 +1,5 @@
 {% load static %}
+{% load custom_filters %}
 <!DOCTYPE html>
   <html>
   <head>
@@ -33,7 +34,7 @@
          </a>
          </li>
          <li>
-          <a href="#">
+          <a href="{% url 'listecommande' %}">
            <span class="icon"><i class="fa fa-shopping-cart"></i></span>
            <span class="title">Commande</span>
          </a>
@@ -146,7 +147,7 @@
                           <td>commande {{commande.id}}</td>
                           <td>{{commande.clients}}</td>
                           <td>{{commande.start_date}}</td>
-                          <td><b> {{commande.valeur_commande}} F CFA</b></td>
+                          <td><b> {{commande.valeur_commande|floatformat:0|format_with_spaces}} F CFA</b></td>
                           <td> {{commande.statut}} <a style="float: right; margin-bottom: 12px; margin-left: 10px; margin-bottom: 30px; " class="btn btn-primary" href=" {% url 'detailcommande' commande.id %} ">Detail</a></td>
                         </tr>
                         {%endfor%}

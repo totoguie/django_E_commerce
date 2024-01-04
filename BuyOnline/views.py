@@ -115,6 +115,9 @@ def inscription(request):
 
 def is_customer(user):
     return user.groups.filter(name='client').exists()
+
+def is_admin(user):
+    return user.groups.filter(name='administrateur').exists()
     
 
 def connexion(request):
@@ -128,7 +131,7 @@ def connexion(request):
                 if is_customer(user):
                     login(request,user)
                     return redirect('index')
-                else:
+                elif is_admin:
                     login(request,user)
                     return redirect("dashboard")
             else:
