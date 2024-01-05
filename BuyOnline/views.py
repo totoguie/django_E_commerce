@@ -1,4 +1,3 @@
-from unicodedata import category, name
 from django.contrib.auth import authenticate,login,logout
 from django.contrib.auth.models import User, Group
 from django.contrib import messages
