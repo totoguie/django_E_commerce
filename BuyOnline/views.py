@@ -45,7 +45,7 @@ def Vetements(request):
             context ={
                'vetement':vetement
             }
-            return render(request, "BuyOnline/index.html",context=context)
+            return render(request, "BuyOnline\index.html",context=context)
      
     liste_vetements =Produit.objects.filter(category="Vetement")
     
@@ -58,7 +58,7 @@ def Vetements(request):
     context = {
         'vetements':vetements
     }
-    return render(request, "BuyOnline/vetements.html",context=context)
+    return render(request, "BuyOnline\vetements.html",context=context)
 
 def Accessoires(request):
     if request.method == "GET":
@@ -69,7 +69,7 @@ def Accessoires(request):
             context ={
                'accessoire':accessoire
             }
-            return render(request, "BuyOnline/index.html",context=context)
+            return render(request, "BuyOnline\index.html",context=context)
      
     liste_accessoires =Produit.objects.filter(category="Accessoire")
     
@@ -82,7 +82,7 @@ def Accessoires(request):
     context = {
         'accessoires':accessoires
     }
-    return render(request, "BuyOnline/accessoire.html",context=context)
+    return render(request, "BuyOnline\accessoire.html",context=context)
     
     
 
@@ -91,7 +91,7 @@ def produit(request,id):
     context = {
         'produit':produit
     }
-    return render(request,"BuyOnline/produit.html",context=context)
+    return render(request,"BuyOnline\produit.html",context=context)
 
 def inscription(request):
     if request.method == "POST":
@@ -108,9 +108,9 @@ def inscription(request):
                 messages.error(request,"Inscription echoué veuillez verifier vos information")
                 return render(request, "inscription.html",{'form':form})
         else:
-            return render(request, "BuyOnline/inscription.html",{'form':form})
+            return render(request, "BuyOnline\inscription.html",{'form':form})
     form = RegisterForm()
-    return render(request,"BuyOnline/inscription.html",{'form':form})
+    return render(request,"BuyOnline\inscription.html",{'form':form})
 
 def is_customer(user):
     return user.groups.filter(name='client').exists()
@@ -135,17 +135,17 @@ def connexion(request):
                     return redirect("dashboard")
             else:
                 messages.error(request,"ERREUR DE CONNEXION VEUILLEZ VERIFIER VOS INFORMATION")
-                return render(request,"BuyOnline/connexion.html",{'form':form})
+                return render(request,"BuyOnline\connexion.html",{'form':form})
     else:
         form = LoginForm()
-        return render(request,"BuyOnline/connexion.html",{'form':form})
+        return render(request,"BuyOnline\connexion.html",{'form':form})
     
 def deconnexion(request):
     logout(request)
     return redirect('index')
 
 def contact(request):
-    return render(request,"BuyOnline/contact.html")
+    return render(request,"BuyOnline\contact.html")
     
 
 class panier(LoginRequiredMixin,View):
@@ -155,10 +155,10 @@ class panier(LoginRequiredMixin,View):
             context = {
                 'object':commande
             }
-            return render (self.request, 'BuyOnline/panier.html',context=context)
+            return render (self.request, 'BuyOnline\panier.html',context=context)
         except ObjectDoesNotExist:
             messages.error(self.request, "Vous n'avez aucun produit commande")
-            return render (self.request, 'BuyOnline/panier.html')
+            return render (self.request, 'BuyOnline\panier.html')
 
 class Produit_panier(LoginRequiredMixin,View):
     def get(self, *args, **kwargs):
@@ -167,7 +167,7 @@ class Produit_panier(LoginRequiredMixin,View):
             context= {
                 'commande':commande
             }
-            return render(self.request, "BuyOnline/panier.html",context=context)
+            return render(self.request, "BuyOnline\panier.html",context=context)
         except ObjectDoesNotExist:
           messages.error(self.request, "Vous n'avez pas de commande") 
           return redirect("/") 
@@ -283,7 +283,7 @@ def ajouter_un_element(request,id):
            context = {
                'object':commande
            }
-           return render (self.request, 'BuyOnline/panier.html',context=context)
+           return render (self.request, 'BuyOnline\panier.html',context=context)
         except ObjectDoesNotExist:
             messages.error(self.request, "Vous n'avez aucun produit commande")
             return redirect("")'''
@@ -297,7 +297,7 @@ class commande(View):
                'object':commande,
                'forms':forms
            }
-           return render (self.request, 'BuyOnline/commande.html',context=context)
+           return render (self.request, 'BuyOnline\commande.html',context=context)
         except ObjectDoesNotExist:
             messages.error(self.request, "Vous n'avez aucun produit commande")
             return redirect("panier")
